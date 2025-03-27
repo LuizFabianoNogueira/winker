@@ -52,14 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/toLoan', [LoanController::class, 'toLoan']);
         Route::post('/{id}/return', [LoanController::class, 'returnBook']);
     });
-
-
-
 });
-
-
-
-
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

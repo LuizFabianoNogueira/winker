@@ -33,8 +33,8 @@ Este é um sistema simples para gerenciar empréstimos de livros, onde você pod
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/usuario/sistema-emprestimos.git
-cd sistema-emprestimos
+git clone https://github.com/LuizFabianoNogueira/winker.git
+cd winker
 ```
 
 ### 2. Instalar as dependências do backend
@@ -53,7 +53,7 @@ Crie um banco de dados no MySQL e configure o arquivo `.env` com suas credenciai
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=sistema_emprestimos
+DB_DATABASE=winker
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -62,6 +62,11 @@ Execute as migrações do banco de dados:
 
 ```bash
 php artisan migrate
+```
+Execute as seeders do banco de dados:
+
+```bash
+php artisan db:seed
 ```
 
 ### 4. Instalar as dependências do frontend
@@ -96,12 +101,21 @@ http://localhost:8000
 
 ## Como Usar
 
+### Acesso Admin
+user:admin@admin.com
+senha:admin123
+
+Admin lista tudo de todos e devolve livros.
+
+Para acesso como usuário comum, é necessário criar um novo usuário.
+O acesso como usuário comum é limitado a visualização dos próprios empréstimos e reserva podendo gerar emprestimo, reserva e devolução.
+
 ### Pesquisa de Empréstimos
 
 - Use o campo de **Buscar empréstimo** para pesquisar por título, autor ou status.
 
 ### Filtros de Empréstimos
-
+- **search**: Filtro para buscar por parte da informação no titulo, author e usuario.
 - **Situação**: Filtro para buscar livros que estão emprestados ou devolvidos.
 - **Data de Retirada**: Filtros por período para a data de retirada do livro. (Início e Fim)
 - **Data de Devolução**: Filtros por período para a data de devolução do livro. (Início e Fim)
@@ -109,19 +123,3 @@ http://localhost:8000
 ### Devolver Livros
 
 Quando o status do livro for "Empréstimo", será possível clicar no botão **Devolver** para devolver o livro e alterar o status para "Devolvido".
-
-### Paginação
-
-A listagem de empréstimos de livros é paginada. Use os botões de navegação para ir para a próxima ou anterior página.
-
-## Contribuições
-
-1. Faça um fork do repositório
-2. Crie uma branch para sua feature (`git checkout -b minha-feature`)
-3. Faça o commit das suas alterações (`git commit -am 'Adicionando uma nova feature'`)
-4. Envie para a branch principal (`git push origin minha-feature`)
-5. Crie uma pull request
-
-## Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).

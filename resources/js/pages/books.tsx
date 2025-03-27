@@ -156,7 +156,7 @@ export default function Books() {
                                         <td className="border border-gray-800 px-4 py-2 text-center">{book.quantity - book.borrowed}</td>
                                         <td className="border border-gray-800 px-4 py-2 text-center">
                                             {auth.user.role === 'admin' ? (
-                                                <button className="bg-gray-500 text-white px-3 py-1 rounded">Emprestimos</button>
+                                                <span></span>
                                             ) : (
                                                 (book.quantity - book.borrowed) > 0 ? (
                                                     <button
