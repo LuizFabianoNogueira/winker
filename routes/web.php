@@ -39,7 +39,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('books-data')->group(function () {
         Route::get('/', [BookController::class, 'index']);
-        Route::get('/{id}', [BookController::class, 'show']);
+        Route::post('/', [BookController::class, 'store']);
+        Route::put('/{id}', [BookController::class, 'update']);
     });
 
     Route::prefix('reservations-data')->group(function () {

@@ -27,12 +27,27 @@ class BookController extends Controller
         );
     }
 
-    /**
-     * @param $id
-     * @return JsonResponse
-     */
-    public function show($id): JsonResponse
+    public function store(BookStoreRequest $request): JsonResponse
     {
-        return response()->json(Book::findOrFail($id));
+        $book = Book::create($request->only(['title', 'author', 'quantity']));
+        return response()->json([
+            'message' => 'Livro cadastrado com sucesso!',
+            'book' => $book
+        ], 201);
+    }
+
+    public function update(BookStoreRequest $request, $id): JsonResponse
+    {
+        $book = Book::find($id);
+        if (!$book) {
+            return response()->json([
+                'message' => 'Livro não encontrado!'
+            ], 404);
+        }
+        $book->update($request->only(['title', 'author', 'quantity']));
+        return response()->json([
+            'message' => 'Livro atualizado com sucesso!',
+            'book' => $book
+        ]);
     }
 }
