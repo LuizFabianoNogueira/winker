@@ -13,8 +13,8 @@ class PasswordUpdateTest extends TestCase
 
     public function test_password_can_be_updated()
     {
+        $this->withoutMiddleware();
         $user = User::factory()->create();
-
         $response = $this
             ->actingAs($user)
             ->from('/settings/password')
@@ -27,14 +27,13 @@ class PasswordUpdateTest extends TestCase
         $response
             ->assertSessionHasNoErrors()
             ->assertRedirect('/settings/password');
-
         $this->assertTrue(Hash::check('new-password', $user->refresh()->password));
     }
 
     public function test_correct_password_must_be_provided_to_update_password()
     {
+        $this->withoutMiddleware();
         $user = User::factory()->create();
-
         $response = $this
             ->actingAs($user)
             ->from('/settings/password')
@@ -43,7 +42,6 @@ class PasswordUpdateTest extends TestCase
                 'password' => 'new-password',
                 'password_confirmation' => 'new-password',
             ]);
-
         $response
             ->assertSessionHasErrors('current_password')
             ->assertRedirect('/settings/password');

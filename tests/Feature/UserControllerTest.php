@@ -34,10 +34,9 @@ class UserControllerTest extends TestCase
 
         User::factory()->create(['name' => 'John Doe']);
         User::factory()->create(['name' => 'Maria Smith']);
-        $response = $this->getJson('users-data', ['search' => 'John']);
+        $response = $this->getJson('/users-data?search=John');
         $response->assertStatus(200)
             ->assertJsonFragment(['name' => 'John Doe'])
-            #todo ver esse abaixo
             ->assertJsonMissing(['name' => 'Maria Smith']);
     }
 }
